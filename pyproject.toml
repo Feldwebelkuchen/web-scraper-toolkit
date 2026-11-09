@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "web-scraper-toolkit"
+version = "0.1.0"
+description = "Configurable, polite scraper for static websites: YAML job definitions, pagination, detail pages, retries, robots.txt, CSV/JSON/XLSX export."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.10"
+authors = [{ name = "Fynn" }]
+keywords = ["scraping", "web-scraping", "data-extraction", "csv", "xlsx", "httpx"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Text Processing :: Markup :: HTML",
+]
+dependencies = [
+    "httpx>=0.25",
+    "selectolax>=0.3",
+    "pyyaml>=6.0",
+    "openpyxl>=3.1",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.4"]
+
+[project.scripts]
+scrape = "web_scraper_toolkit.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/Feldwebelkuchen/web-scraper-toolkit"
+Repository = "https://github.com/Feldwebelkuchen/web-scraper-toolkit"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

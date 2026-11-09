@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.venv/
+venv/
+
+# Local scrape output (examples/output/ is tracked on purpose)
+*.csv
+*.json
+*.xlsx
+!examples/output/*.csv
+!examples/output/*.xlsx
+
+# Editors / OS
+.idea/
+.vscode/
+.DS_Store

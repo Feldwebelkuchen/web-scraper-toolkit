@@ -1,0 +1,9 @@
+21:32:35 INFO    https://books.toscrape.com/robots.txt: not found (HTTP 404) - no restrictions
+21:32:36 INFO    list page 1/3 https://books.toscrape.com/catalogue/page-1.html -> 20 items
+21:33:08 INFO    list page 2/3 https://books.toscrape.com/catalogue/page-2.html -> 20 items
+21:33:41 INFO    list page 3/3 https://books.toscrape.com/catalogue/page-3.html -> 20 items
+21:34:12 INFO    done: 60 records, 3 list pages, 60 detail pages, 64 requests (0 retries), 0 duplicates skipped, 0 blocked by robots.txt, 0 errors, 98.1 s
+wrote 60 records to examples/output/books-sample.xlsx (xlsx)
+wrote 60 records to examples/output/books-sample.csv (csv)
+summary: 60 records, 3 list pages, 60 detail pages, 64 requests (0 retries), 0 duplicates skipped, 0 blocked by robots.txt, 0 errors, 98.1 s
+exit code: 0

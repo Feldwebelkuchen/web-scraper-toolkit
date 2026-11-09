@@ -1,0 +1,36 @@
+# Example job: https://quotes.toscrape.com (official scraping sandbox).
+# Demonstrates multi-value fields and "next"-link pagination without detail pages.
+#
+#   scrape run examples/quotes.yaml --out quotes.json
+
+name: quotes-toscrape
+
+start_urls:
+  - https://quotes.toscrape.com/
+
+request:
+  user_agent: "web-scraper-toolkit/0.1 (+https://github.com/Feldwebelkuchen/web-scraper-toolkit)"
+  delay: 1.0
+  jitter: 0.5
+
+list_selector: "div.quote"
+
+fields:
+  text:
+    selector: "span.text"
+    regex: "^[“\"]?(.*?)[”\"]?$"     # strip the typographic quotes
+  author:
+    selector: "small.author"
+  author_url:
+    selector: "span a"
+    attr: href
+    absolute: true
+  tags:
+    selector: "div.tags a.tag"
+    multiple: true                   # list in JSON, "a | b | c" in CSV/XLSX
+
+pagination:
+  next_selector: "li.next a"
+  max_pages: 10
+
+dedupe_key: text

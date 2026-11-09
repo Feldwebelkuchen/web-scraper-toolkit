@@ -1,0 +1,63 @@
+# Example job: https://books.toscrape.com (an official scraping sandbox).
+# List pages -> one detail page per book -> 60 records for 3 pages.
+#
+#   scrape validate examples/books.yaml
+#   scrape sample   examples/books.yaml --pages 1
+#   scrape run      examples/books.yaml --out examples/output/books-sample.xlsx
+
+name: books-toscrape
+
+start_urls:
+  - https://books.toscrape.com/catalogue/page-1.html
+
+# Identify yourself. Replace the contact placeholder before running real jobs.
+request:
+  user_agent: "web-scraper-toolkit/0.1 (+https://github.com/Feldwebelkuchen/web-scraper-toolkit)"
+  timeout: 15
+  delay: 1.0        # seconds between requests ...
+  jitter: 0.5       # ... plus up to this much random extra
+  retries: 3        # on 429 / 5xx / network errors
+  backoff: 2.0      # 1 s, 2 s, 4 s
+
+respect_robots: true   # default; set to false only with the site owner's permission
+
+list_selector: "article.product_pod"
+
+fields:
+  title:
+    selector: "h3 a"
+    attr: title
+  price:
+    selector: ".price_color"
+    regex: "([0-9.]+)"
+    type: float
+  availability:
+    selector: ".availability"            # text is whitespace-normalised automatically
+  rating:
+    selector: ".star-rating"
+    attr: class
+    regex: "star-rating (\\w+)"          # "One" .. "Five"
+  url:
+    selector: "h3 a"
+    attr: href
+    absolute: true                       # resolve against the page URL
+
+detail:
+  follow: url                            # list field that holds the detail URL
+  fields:
+    category:
+      selector: "ul.breadcrumb li:nth-child(3) a"
+    upc:
+      selector: "table.table-striped tr:nth-child(1) td"
+    stock_count:
+      selector: ".product_main .availability"
+      regex: "\\((\\d+) available\\)"
+      type: int
+    description:
+      selector: "#product_description ~ p"
+
+pagination:
+  next_selector: "li.next a"
+  max_pages: 3
+
+dedupe_key: upc
