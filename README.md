@@ -2,6 +2,8 @@
 
 Turn any static website into a clean spreadsheet with a 30-line YAML file - politely, repeatably, without writing code.
 
+> **Need this done for you?** I deliver custom scrapers, data pipelines and automations as a service – order on Fiverr: https://www.fiverr.com/feldwebelkuchen
+
 ```
 $ scrape run examples/books.yaml --out books.xlsx
 21:32:35 INFO    list page 1/3 https://books.toscrape.com/catalogue/page-1.html -> 20 items
